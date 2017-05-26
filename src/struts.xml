@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <constant name="struts.devMode" value="true"></constant>
+    <package name="myfirst" namespace="/" extends="struts-default">
+        <action name="login" class="com.pzhihao.action.LoginAction">
+            <result name="success">/WEB-INF/success.jsp</result>
+            <result name="input">/WEB-INF/failed.jsp</result>
+        </action>
+        <action name="klogin" class="com.pzhihao.action.KtLoginAction">
+            <result name="success">/WEB-INF/success.jsp</result>
+            <result name="input">/WEB-INF/failed.jsp</result>
+            <interceptor-ref name="fileUpload">
+                <!-- 文件过滤 -->
+                <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>
+                <!-- 文件大小, 以字节为单位 -->
+                <param name="maximumSize">104857600</param>
+            </interceptor-ref>
+            <!-- 默认拦截器必须放在fileUpload之后，否则无效 -->
+            <interceptor-ref name="defaultStack" />
+        </action>
+    </package>
+</struts>
